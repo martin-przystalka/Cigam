@@ -1,0 +1,22 @@
+{
+  "name": "cigam",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martin-przystalka/Cigam.git"
+  },
+  "keywords": [
+    "arbo"
+  ],
+  "author": "martin.przystalka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/martin-przystalka/Arbo/issues"
+  },
+  "homepage": "https://github.com/martin-przystalka/Arbo#readme",
+  "description": ""
+}
