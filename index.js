@@ -3,7 +3,11 @@
 const { exec } = require('child_process');
 
 const version = process.argv[2];
+let script = 'ruby version.rb '
+if (version != undefined) {
+    script += version;
+}
 
-exec('ruby version.rb ' + version, (err, stdout, stderr) => {
-  console.log(`${stdout}`);
+exec(script, (err, stdout, stderr) => {
+    console.log(`${stdout}`);
 });
