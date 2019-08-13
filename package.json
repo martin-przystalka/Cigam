@@ -1,9 +1,10 @@
 {
   "name": "cigam",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "increment": "ruby version.rb"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,8 @@
   "author": "martin.przystalka",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/martin-przystalka/Arbo/issues"
+    "url": "https://github.com/martin-przystalka/Cigam/issues"
   },
-  "homepage": "https://github.com/martin-przystalka/Arbo#readme",
-  "description": ""
+  "homepage": "https://github.com/martin-przystalka/Cigam#readme",
+  "description": "Script for incrementing react native project version"
 }
