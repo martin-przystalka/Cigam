@@ -79,7 +79,10 @@ check_precondition('package.json')
 
 if ARGV.empty?
   increment_patch
+  puts 'patch increased'
 else
   version = ARGV[0]
+  puts "updating to version: #{version}"
   upgrade_to_version(version)
+  puts 'version updated'
 end
