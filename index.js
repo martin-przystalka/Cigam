@@ -9,5 +9,7 @@ if (version != undefined) {
 }
 
 exec(script, (err, stdout, stderr) => {
-    console.log(`${stdout}`);
+    if(stdout.length > 0) {
+        console.log(`${stdout.trim()}`);
+    }
 });
