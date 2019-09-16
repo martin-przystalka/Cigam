@@ -20,7 +20,12 @@ Add cigam to package.json
 Link commands
 ```npm link cigam```
 
-Create version.properties, you can copy this file and use it as template. Remember to use fields defined from template, only those are supported.
+Create version.properties, [you can copy this file] and use it as template. Remember to use fields defined from template, only those are supported.
+
+[you can copy this file]: https://github.com/martin-przystalka/Cigam/blob/master/version.properties
+
+
+
 
 Modify ```build.gradle``` file to look like this:
 
