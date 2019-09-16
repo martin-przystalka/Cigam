@@ -10,7 +10,7 @@
     "url": "git+https://github.com/martin-przystalka/Cigam.git"
   },
   "keywords": [
-    "arbo"
+    "cigam", "versioning", "react-native", "automate", "continuous delivery"
   ],
   "author": "martin.przystalka",
   "license": "MIT",
