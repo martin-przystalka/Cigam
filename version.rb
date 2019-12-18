@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'json'
+require 'optparse'
 
 class PropertiesManager
   attr_reader :file, :properties
@@ -29,7 +30,7 @@ def update_react_app_version(version)
   pretty_json = JSON.pretty_generate(hash)
   file_write.puts pretty_json
   file_write.close
-  end
+end
 
 def update_android_version(version)
   file_path = 'android/app/version.properties'
@@ -73,16 +74,67 @@ def check_precondition(path)
   end
 end
 
+def upgrade_build_number
+  # ANDROID
+  file_path = 'android/app/version.properties'
+  props = PropertiesManager.new(file_path)
+  props.properties['VERSION_CODE'] = props.properties['VERSION_CODE'].to_i + 1
+  props.save
+  # IOS
+  Dir.chdir('./ios') do
+    `xcrun agvtool next-version -all`
+  end
+  up_build_number_rn(props.properties['VERSION_CODE'].to_i)
+end
+
+def up_build_number_rn(build_number)
+  # REACT NATIVE
+  file = File.read('package.json')
+  hash = JSON.parse file
+  hash['build'] = build_number
+  file_write = File.open('package.json', 'w')
+  pretty_json = JSON.pretty_generate(hash)
+  file_write.puts pretty_json
+  file_write.close
+end
+
 check_precondition('./ios')
 check_precondition('android/app/version.properties')
 check_precondition('package.json')
 
-if ARGV.empty?
-  increment_patch
-  puts 'patch increased'
-else
-  version = ARGV[0]
-  puts "updating to version: #{version}"
-  upgrade_to_version(version)
-  puts 'version updated'
-end
+OptionParser.new do |opts|
+  opts.banner = 'Cigam - versioning script.'
+  opts.on('--increment-version [ARG]', 'Increment project version') do |v|
+    if v
+      puts "updating to version: #{v}"
+      upgrade_to_version(v)
+      puts 'version updated'
+    else
+      increment_patch
+      puts 'patch increased'
+    end
+  end
+  opts.on('--increment-build', 'Increment project build number') do |v|
+    upgrade_build_number
+    puts 'build number increased'
+  end
+  opts.on('-h', '--help', 'Display this help') do
+    puts opts
+    exit
+  end
+end.parse!
+
+# if ARGV.empty?
+#   increment_patch
+#   puts 'patch increased'
+# else
+#   version = ARGV[0]
+#   ARGV.each do |n|
+#     puts "Current number is: #{n}"
+#   end
+#   puts ARGV
+#   puts "updating to version: #{version}"
+#   # upgrade_to_version(version)
+#   upgrade_build_number
+#   puts 'version updated'
+# end

@@ -2,13 +2,17 @@
 
 Cigam is small script to automate increasing android and iOS project versions with one command.
 
-### Example usage
+## Example usage
 
-```shell increment-project-version``` Increase build number and patch
+```shell --increment-build``` Increase build number.
 
-```shell increment-project-version 1.0.554``` Set specified version of project. This also increase build number.
+```shell --increment-version``` Increase build number and patch.
 
-### How to setup
+```shell --increment-version 1.0.554``` Set specified version of project. This also increase build number.
+
+```shell -h``` To list all commands.
+
+## How to setup
 
 Add cigam to package.json
 
@@ -17,7 +21,7 @@ Add cigam to package.json
     "cigam": "^1.0.16"
   },
   ```
-Link commands
+And link
 ```npm link cigam```
 
 Create version.properties, [you can copy this file] and use it as template. Remember to use fields defined from template, only those are supported.
