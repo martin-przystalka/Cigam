@@ -103,7 +103,7 @@ check_precondition('android/app/version.properties')
 check_precondition('package.json')
 
 OptionParser.new do |opts|
-  opts.banner = 'Cigam - versioning script.'
+  opts.banner = "✨ Cigam ✨ is a 🔢 versioning script. Use one of following commands:\n\n"
   opts.on('--increment-version [ARG]', 'Increment project version') do |v|
     if v
       puts "updating to version: #{v}"
@@ -113,28 +113,19 @@ OptionParser.new do |opts|
       increment_patch
       puts 'patch increased'
     end
+    exit
   end
   opts.on('--increment-build', 'Increment project build number') do |v|
     upgrade_build_number
     puts 'build number increased'
+    exit
   end
   opts.on('-h', '--help', 'Display this help') do
     puts opts
     exit
   end
+  opts.on('', 'Display this help') do
+    puts opts
+    exit
+  end
 end.parse!
-
-# if ARGV.empty?
-#   increment_patch
-#   puts 'patch increased'
-# else
-#   version = ARGV[0]
-#   ARGV.each do |n|
-#     puts "Current number is: #{n}"
-#   end
-#   puts ARGV
-#   puts "updating to version: #{version}"
-#   # upgrade_to_version(version)
-#   upgrade_build_number
-#   puts 'version updated'
-# end
