@@ -2,6 +2,7 @@
 
 require 'json'
 require 'optparse'
+require 'os'
 
 class PropertiesManager
   attr_reader :file, :properties
@@ -96,6 +97,11 @@ def up_build_number_rn(build_number)
   pretty_json = JSON.pretty_generate(hash)
   file_write.puts pretty_json
   file_write.close
+end
+
+isMacOs = OS.mac?
+if !isMacOs
+  abort("🚫 Shutting down 🚫 \n Only mac os is supported.")
 end
 
 check_precondition('./ios')

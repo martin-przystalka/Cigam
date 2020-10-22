@@ -14,7 +14,7 @@ Cigam is small script to automate increasing android and iOS project versions wi
 
 ## How to setup
 
-Install cigam using npm ```npm link cigam``` and link ```npm link cigam```
+Install cigam using npm ```npm i cigam``` and link ```npm link cigam```
 
 Create version.properties, [you can copy this file] and use it as template. Remember to use fields defined from template, only those are supported.
 
