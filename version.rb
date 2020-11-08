@@ -63,7 +63,9 @@ def increment_patch
 end
 
 def upgrade_to_version(version)
-  update_ios_version(version)
+  if OS.mac? 
+    update_ios_version(version)
+  end
   update_react_app_version(version)
   update_android_version(version)
 end
@@ -82,11 +84,14 @@ def upgrade_build_number
   props.properties['VERSION_CODE'] = props.properties['VERSION_CODE'].to_i + 1
   props.save
   # IOS
-  Dir.chdir('./ios') do
-    `xcrun agvtool next-version -all`
+  if OS.mac?
+    Dir.chdir('./ios') do
+      `xcrun agvtool next-version -all`
+    end
+    up_build_number_rn(props.properties['VERSION_CODE'].to_i)
   end
-  up_build_number_rn(props.properties['VERSION_CODE'].to_i)
 end
+
 
 def up_build_number_rn(build_number)
   # REACT NATIVE
@@ -97,11 +102,6 @@ def up_build_number_rn(build_number)
   pretty_json = JSON.pretty_generate(hash)
   file_write.puts pretty_json
   file_write.close
-end
-
-isMacOs = OS.mac?
-if !isMacOs
-  abort("🚫 Shutting down 🚫 \n Only mac os is supported.")
 end
 
 check_precondition('./ios')
